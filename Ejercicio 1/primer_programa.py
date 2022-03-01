@@ -4,7 +4,7 @@ import csv
 # CARGA ESTACIONES
 estacion = []
 estacion.append("vacio") #COLOCA EL ELEMENTO "vacio" EN EL ÍNDICE CERO
-with open("estaciones.csv", newline='') as File:  #ABRE EL ARCHIVO
+with open("./estaciones.csv", newline='') as File:  #ABRE EL ARCHIVO
   archivo = csv.reader(File) #ESTO HACE QUE INTERPRETE EL ARCHIVO COMO CSV
   for registro in archivo: #TOMA UN registro DEL CSV CADA VEZ QUE ITERA
       # CONSEJO COMENTARIOS EN MAYÚSCULAS, DATO Y TIPO DE DATO EN minúsculas
