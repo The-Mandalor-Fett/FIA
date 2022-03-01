@@ -43,6 +43,7 @@ while len(cola) > 0: # MIENTRAS LA COLA TENGA ELEMENTOS
     vecinos = estacion[nodo][5] #VA A LA LISTA DE LOS VECINOS AL REGISTRO 5 QUE ES LA LISTA DE VECINOS
     print(vecinos)
     #COMO NO CHECA SI YA UTILIZAMOS LA ESTACION PASADA PUEDE QUE SE HAGA UN LOOP INFINITO
+    #UN EJEMPLO ES  HACER DE LA LINEA 1 A LA 12
     for vecino in vecinos:
          cola.append( int(vecino) ) # ADICIONA CADA VECINO EN LA COLA
 if haySolucion == True:
