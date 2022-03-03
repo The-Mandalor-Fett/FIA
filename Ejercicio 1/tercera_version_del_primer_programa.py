@@ -70,5 +70,6 @@ print("Estación || Línea")
 for incremental in utilizados:
     plan=(estacion[incremental][1],estacion[incremental][2])
     print("De la estacion "+str(plan),end= " ")
+    print("nos movemos a la estación ")
 
 #print(type (plan)) #IMPRIMIE EL tipo de dado DE PLAN (ES UNA TUPLA)
