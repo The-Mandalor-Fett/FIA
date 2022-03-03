@@ -40,7 +40,7 @@ while len(cola) > 0: # MIENTRAS LA COLA TENGA ELEMENTOS
 
     utilizados.append(nodo)  # AÑADE EL NODO A LOS UTILIZADOS PARA EVITAR LOOPS INFINITO
 
-    #visitados.append((anterior,nodo)) # GUARDA PARES (NODO anterior, nodo ACTUAL)
+    visitados.append((anterior,nodo)) # GUARDA PARES (NODO anterior, nodo ACTUAL)
     anterior = nodo   # ACTUALIZA EL NODO anterior COMO EL nodo ACTUAL
    
     if nodo == estacionFin:
@@ -55,6 +55,6 @@ while len(cola) > 0: # MIENTRAS LA COLA TENGA ELEMENTOS
 # TERMINÓ LA BÚSQUEDA, AHORA OBTIENE LA RUTA (plan)            
 if haySolucion == True:
     print("HAY SOLUCION")
-    #print(visitados) #POR EL MOMENTO IMPRIME LOS DATOS ERRONEOS YA QUE PASA POR PANTITLAN VARIAS VECES AL SER VECINOS
+    print(visitados) #POR EL MOMENTO IMPRIME LOS DATOS ERRONEOS YA QUE PASA POR PANTITLAN VARIAS VECES AL SER VECINOS
 else:
     print("no hay solución")
