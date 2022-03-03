@@ -1,5 +1,6 @@
 # PROGRAMA 3 CORRIGE LOS NODOS VISITADOS PARA OBTENER EL PLAN
 import csv
+from ctypes import util
 
 # CARGA ESTACIONES
 estacion = []  # INICIALIZA LA LISTA
@@ -60,3 +61,14 @@ if haySolucion == True:
     print(visitados)
 else:
     print("no hay solución")
+#AHORA IMPRIMIMOS EL PLAN
+print("Estacion de inicio: "+str(estacion[estacionIni][1]))
+print("Estacion a la que se quiere llegar: "+str(estacion[estacionFin][1]))
+#print(type (utilizados))
+# EL plan SE EMPIEZA A IMPRIMIR
+print("Estación || Línea")
+for incremental in utilizados:
+    plan=(estacion[incremental][1],estacion[incremental][2])
+    print("De la estacion "+str(plan),end= " ")
+
+#print(type (plan)) #IMPRIMIE EL tipo de dado DE PLAN (ES UNA TUPLA)
