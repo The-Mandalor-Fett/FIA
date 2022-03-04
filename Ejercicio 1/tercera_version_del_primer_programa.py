@@ -54,10 +54,18 @@ while len(cola) > 0: # MIENTRAS LA COLA TENGA ELEMENTOS
     for vecino in vecinos:
          if not (vecino in utilizados):
              cola.append((nodo, vecino)) # ADICIONA CADA VECINO EN LA COLA
-
 # TERMINÓ LA BÚSQUEDA, AHORA OBTIENE LA RUTA (plan)            
 if haySolucion == True:
     print("HAY SOLUCION")
+    '''
+    print(visitados[0][0])
+    print(visitados[0][1])
+    print(visitados[1][0])
+    print(visitados[1][1])
+    print(visitados[2][0]) #NADA MÁS PARA SABER EN QUE PARTE SE ENCUENTRA CADA UNA DE LAS COSAS
+    print(visitados[2][1])
+    print(visitados[3][0])
+    print(visitados[3][1])'''
     print(visitados)
 else:
     print("no hay solución")
@@ -66,10 +74,13 @@ print("Estacion de inicio: "+str(estacion[estacionIni][1]))
 print("Estacion a la que se quiere llegar: "+str(estacion[estacionFin][1]))
 #print(type (utilizados))
 # EL plan SE EMPIEZA A IMPRIMIR
-print("Estación || Línea")
-for incremental in utilizados:
-    plan=(estacion[incremental][1],estacion[incremental][2])
-    print("De la estacion "+str(plan),end= " ")
-    print("nos movemos a la estación ")
-
+subplan=len(visitados)-1
+plan=[]
+while subplan > -1:
+  #print(subplan)
+  plan = visitados[subplan][1]
+  print("De la estación "+str(estacion[plan-1][1]), end=" ")
+  print("nos movemos a "+str(estacion[plan][1]))
+  subplan-=1
+#print(plan)
 #print(type (plan)) #IMPRIMIE EL tipo de dado DE PLAN (ES UNA TUPLA)
