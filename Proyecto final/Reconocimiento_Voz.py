@@ -32,3 +32,6 @@ def Reconocer_voz():
 
 
 Reconocer_voz()
+#pip install pipwin
+#pipwin install pyaudio
+#pip uninstall pipwin
