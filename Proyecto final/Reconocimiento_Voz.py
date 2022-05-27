@@ -8,20 +8,22 @@ def Reconocer_voz():
     print("Micrfono encontrado en la PC:  \n {sr.Microphone.list_micophpne_names()}")
     #CREAMOS UN OBJETO DE RECONOCIMIENTO
     reconocimiento = sr.Recognizer()
-    engine = pyttsx3.init()
-    voces = engine.getProperty('voices')
-    engine.setProperty('Voz',voces[3].id)
-
-    '''index = 0
-    for voice in voces:
-        print(f'index-> {index} -- {voice.name}')
-        index +=1'''
+    
     def hablar(frase,texto):
+        engine = pyttsx3.init()
+        voces = engine.getProperty('voices')
+        engine.setProperty('Voz',voces[0].id)
         engine.say(texto)
         engine.say(frase)
         engine.runAndWait()
 
-    reconocimiento.energy_threshold = 8000 #TENEMOS VALORES DE 150 A 3500, PONEMOS EL QUE QUEDE
+    '''index = 0
+        for voice in voces:
+        print(f'index-> {index} -- {voice.name}')
+        index +=1'''
+
+
+    reconocimiento.energy_threshold = 50000 #TENEMOS VALORES DE 150 A 4000 son los buenos, PONEMOS EL QUE QUEDE
     reconocimiento.dynamic_energy_threshold = False
 
     with sr.Microphone() as source:
@@ -34,7 +36,7 @@ def Reconocer_voz():
             hablar(frase,texto)
             url = "https://www.google.com/search?q="
             buscar  = url + frase
-            wb.open(buscar)
+            #wb.open(buscar)
         except TimeoutException as msg:
             print(msg)
         except WaitTimeoutError:
