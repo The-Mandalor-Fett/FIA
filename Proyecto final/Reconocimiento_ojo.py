@@ -1,3 +1,4 @@
+from pickle import TRUE
 import cv2
 
 #VIDEOCAPTURA
@@ -32,5 +33,31 @@ while True :
     gris = cv2.GaussianBlur(gris, (3,3),0)
 
     #SE USA UN UMBRAL PARA DETECTAR LA PUPILA GRACIAS AL NEGRO DE NUESTRA PUPILA
-    umbral = cv2.threshold(gris , 7, 255, cv2.THRESH_BINARY_INV)
+    _ , umbral = cv2.threshold(gris , 7, 255, cv2.THRESH_BINARY_INV)
+
+    #EXTRAEMOS LOS CONTORNOS DE LA ZONA DE LA PUPILA
+    contornos , _ = cv2.findContours(umbral, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+    #ORGANIZAMOS LOS CONTORNOS
+    contornos =  sorted(contornos, key = lambda x: cv2.contourArea(x), reverse = TRUE)
+
+    #DIBUJA CONTORNOS
+    for contorno in contornos:
+        (x, y, ancho, alto) = cv2.boundingRect(contorno)
+
+        #DIBUJA
+        cv2.rectangle(frame,(x + x1, y + y1),(x + ancho + x1, y + alto + y1),(0,255,0),1)
+
+        break
+    
+    cv2.imshow("Ojos", frame)
+    cv2.imshow("Recorte", recorte)
+    cv2.imshow("Umbral", umbral)
+
+    tecla = cv2.waitKey(1)
+    if tecla == 27:
+        break
+    captura.release()
+    cv2.destroyAllWindows()
+
 
