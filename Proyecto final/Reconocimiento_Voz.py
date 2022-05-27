@@ -1,5 +1,7 @@
 import speech_recognition as sr
 import webbrowser as wb
+import pyttsx3
+
 
 def Reconocer_voz():
     sr.Microphone(device_index = 0) #INICIALIZA EL MICRÓFONO 0 = POR DEFECTO
