@@ -4,10 +4,12 @@ from cv2 import cvtColor
 import numpy as np
 import imutils as nimu
 import dlib as db
-import math
-
+import math 
 
 captura = cv2.VideoCapture(0)
+recuadro = np.zeros((500, 500), np.uint8)
+recuadro[:] = 255
+
 #DETECTOR DE LA CARA DE DLIB
 detectorCara = db.get_frontal_face_detector()
 #PREDICTOR DE 68 PUNTOS DE REFERENCIA
@@ -22,6 +24,8 @@ key_caps ={0: "Q", 1: "W", 2: "E", 3: "R", 4: "T", 5: "Y",
 
 frames = 0
 index_teclas = 0
+contador_parpadeos = 0
+palabras = ""
 font = cv2.FONT_HERSHEY_PLAIN
 
 def obtener_Parpadeo(puntosOjo, puntosDeCara):
@@ -222,9 +226,18 @@ while True:
         parpadeo_ojoDer = obtener_Parpadeo([42,43,44,45,46,47], puntosCara)
         parpadeoAmbosOjos = (parpadeo_ojoIzq + parpadeo_ojoDer)/2
 
-        if(parpadeoAmbosOjos > 6):
-            cv2.putText(frame,"Parpadeo",(50,150),font,7,(0,255,0),3)
-        
+        if(parpadeoAmbosOjos > 5.9):
+            cv2.putText(frame,"Parpadeo",(50,150),font,4,(0,255,0),3)
+
+            letra_activa = key_caps[index_teclas] #OBTENEMOS LA LETRA PARPADEANDO
+            contador_parpadeos += 1
+            frames -= 1
+
+            if contador_parpadeos == 5:
+                palabras += letra_activa
+        else:
+            contador_parpadeos = 0
+            #print(letra_activa)
         
         #DETECIÓN DE LA MIRADA
         mirada_ojo_izq = mirada([36,37,38,39,40,41], puntosCara)
@@ -232,8 +245,8 @@ while True:
         miradaOjos = (mirada_ojo_izq + mirada_ojo_der)/2
 
         
-
-        if miradaOjos <= 1:
+        
+        '''if miradaOjos <= 1:
             cv2.putText(frame, "Derecha", (50,100), font, 2, (0,255,0), 3)
             nuevo_frame[:] = (0,0,255)
         elif 1 < miradaOjos < 3:
@@ -242,7 +255,7 @@ while True:
         else:
             cv2.putText(frame, "Izquierda", (50,100), font, 2, (0,255,0), 3)
             nuevo_frame[:] = (255,0,0)
-        
+        '''
         #umbralOjo = cv2.resize(umbralOjo, None, fx = 4, fy = 4)
         #ojo = cv2.resize(ojoGris, None, fx = 4, fy = 4)
         #ojo = nimu.resize(ojo, height=120, width=120)
@@ -255,7 +268,7 @@ while True:
             x , y = puntosCara.part(i).x, puntosCara.part(i).y
             cv2.circle(frame, (x, y),2, (0,0,255),-1)'''
     
-    if frames == 10:
+    if frames == 15:
         index_teclas += 1
         frames = 0
         
@@ -269,9 +282,11 @@ while True:
             letra_blanco = False
         letras(i, key_caps[i], letra_blanco)
 
+    cv2.putText(recuadro, palabras, (100,100), font, 4, (0,255,0), 4)
     cv2.imshow("Video",frame)
-    cv2.imshow("Nuevo frame", nuevo_frame)
+    #cv2.imshow("Nuevo frame", nuevo_frame)
     cv2.imshow("Teclado", teclado)
+    cv2.imshow("Cuadro del texto", recuadro)
     #SI LA LECTURA DE LA CAPTURA ES CORRECTA NO CIERRA EL PROGRAMA
     if ret == False:
         break
