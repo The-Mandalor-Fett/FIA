@@ -233,7 +233,7 @@ while True:
             contador_parpadeos += 1
             frames -= 1
 
-            if contador_parpadeos == 5:
+            if contador_parpadeos == 2: #DEPENDIENDO DEL TIEMPO DEL PARPADEO IMPRIME LA LETRA
                 palabras += letra_activa
         else:
             contador_parpadeos = 0
