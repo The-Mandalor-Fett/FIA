@@ -210,7 +210,7 @@ while True:
     #MODIFICA EL TAMAÑO DE LA VENTANA
     frame = nimu.resize(frame,width=720)
     frameGris =  cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)#EN ESTA SE APLICA EL DETECTOR FACIAL
-    cuadrosDelimitadores = detectorCara(frameGris,1)#OBTIENE LOS CUADROS DELIMITADORES DEL ROSTRO
+    cuadrosDelimitadores = detectorCara(frameGris)#OBTIENE LOS CUADROS DELIMITADORES DEL ROSTRO GRACIAS A QUE ES MÁS CLARO EL GRIS
     
     frames += 1
     teclado[:] = (0,0,0)
